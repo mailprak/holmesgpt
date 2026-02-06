@@ -70,7 +70,7 @@ before_test: |
   APP_CREATED=false
   for i in {1..30}; do
     if kubectl get application $APP_NAME -n $NAMESPACE >/dev/null 2>&1; then
-      echo "✅ Application resource created"
+      echo "Application resource created"
       APP_CREATED=true
       break
     fi
@@ -79,7 +79,7 @@ before_test: |
   done
 
   if [ "$APP_CREATED" = false ]; then
-    echo "❌ Application failed to be created after 60 seconds"
+    echo "Application failed to be created after 60 seconds"
     echo ""
     echo "=== KubeVela controller logs (last 50 lines) ==="
     kubectl logs -n vela-system -l app.kubernetes.io/name=vela-core --tail=50 || echo "No controller logs found"
@@ -91,7 +91,7 @@ before_test: |
   VELA_APP_VISIBLE=false
   for i in {1..30}; do
     if vela ls -n $NAMESPACE 2>&1 | grep -q "$APP_NAME"; then
-      echo "✅ Application visible via vela CLI"
+      echo "Application visible via vela CLI"
       VELA_APP_VISIBLE=true
       break
     fi
@@ -100,7 +100,7 @@ before_test: |
   done
 
   if [ "$VELA_APP_VISIBLE" = false ]; then
-    echo "❌ Application not visible in vela ls after 60 seconds"
+    echo "Application not visible in vela ls after 60 seconds"
     echo ""
     echo "=== Application status ==="
     kubectl get application $APP_NAME -n $NAMESPACE -o yaml || true
@@ -115,7 +115,7 @@ before_test: |
   vela status $APP_NAME -n $NAMESPACE || true
 
   echo ""
-  echo "✅ Test setup completed - application deployed with intentional issue"
+  echo "Test setup completed - application deployed with intentional issue"
 
 after_test: |
   kubectl delete application payment-service -n app-212 || true
