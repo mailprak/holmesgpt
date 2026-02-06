@@ -19,11 +19,11 @@ before_test: |
   NAMESPACE="app-212"
   APP_NAME="payment-service"
 
-  echo "🔧 Creating namespace $NAMESPACE..."
+  echo "Creating namespace $NAMESPACE..."
   kubectl create namespace $NAMESPACE || true
 
   echo ""
-  echo "🔧 Installing KubeVela core..."
+  echo "Installing KubeVela core..."
   # Check if vela-system namespace exists
   if ! kubectl get namespace vela-system >/dev/null 2>&1; then
     echo "Installing KubeVela..."
@@ -33,11 +33,11 @@ before_test: |
   fi
 
   echo ""
-  echo "⏳ Waiting for KubeVela controller to be ready..."
+  echo "Waiting for KubeVela controller to be ready..."
   kubectl wait --for=condition=available --timeout=120s deployment/vela-core -n vela-system
 
   echo ""
-  echo "📝 Creating a KubeVela application with an issue..."
+  echo "Creating a KubeVela application with an issue..."
   cat <<EOF | kubectl apply -f -
   apiVersion: core.oam.dev/v1beta1
   kind: Application
@@ -62,11 +62,11 @@ before_test: |
   EOF
 
   echo ""
-  echo "⏳ Waiting for application to be processed..."
+  echo "Waiting for application to be processed..."
   sleep 10
 
   echo ""
-  echo "🔍 Checking application status..."
+  echo "Checking application status..."
   APP_CREATED=false
   for i in {1..30}; do
     if kubectl get application $APP_NAME -n $NAMESPACE >/dev/null 2>&1; then
@@ -74,7 +74,7 @@ before_test: |
       APP_CREATED=true
       break
     fi
-    echo "⏳ Attempt $i/30: Waiting for application to be created..."
+    echo "Attempt $i/30: Waiting for application to be created..."
     sleep 2
   done
 
@@ -87,7 +87,7 @@ before_test: |
   fi
 
   echo ""
-  echo "🔍 Verifying application is accessible via vela CLI..."
+  echo "Verifying application is accessible via vela CLI..."
   VELA_APP_VISIBLE=false
   for i in {1..30}; do
     if vela ls -n $NAMESPACE 2>&1 | grep -q "$APP_NAME"; then
@@ -95,7 +95,7 @@ before_test: |
       VELA_APP_VISIBLE=true
       break
     fi
-    echo "⏳ Attempt $i/30: Waiting for app to be visible in vela ls..."
+    echo "Attempt $i/30: Waiting for app to be visible in vela ls..."
     sleep 2
   done
 
@@ -111,7 +111,7 @@ before_test: |
   fi
 
   echo ""
-  echo "🔍 Application status:"
+  echo "Application status:"
   vela status $APP_NAME -n $NAMESPACE || true
 
   echo ""
