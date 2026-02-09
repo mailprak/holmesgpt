@@ -47,7 +47,7 @@ toolsets:
 
       - name: "vela_logs"
         description: "Get logs from a KubeVela application or specific component"
-        command: "vela logs {{ app_name }} -n {{ namespace }}{% if component %} -c {{ component }}{% endif %} --tail {{ tail | default(500) }}"
+        command: "vela logs {{ app_name }} -n {{ namespace }}{% if component %} -c {{ component }}{% endif %}{% if pod %} --pod {{ pod }}{% endif %} --tail {{ tail | default(500) }} -y"
 
       - name: "vela_port_forward"
         description: "Check port-forward capability for debugging (informational only, doesn't create actual port-forward)"
@@ -71,7 +71,7 @@ toolsets:
 
       - name: "vela_workflow_logs"
         description: "Get logs from a workflow execution"
-        command: "vela workflow logs {{ app_name }} -n {{ namespace }} --tail {{ tail | default(500) }}"
+        command: "vela workflow logs {{ app_name }} -n {{ namespace }} --tail {{ tail | default(500) }} -y"
 
       - name: "vela_addon_list"
         description: "List installed KubeVela addons"
@@ -87,7 +87,7 @@ toolsets:
 
       - name: "vela_top"
         description: "Show resource usage (CPU/Memory) for application pods"
-        command: "kubectl top pods -l app.kubernetes.io/name={{ app_name }} -n {{ namespace }}"
+        command: "kubectl top pods -l app.oam.dev/name={{ app_name }} -n {{ namespace }}"
 
       - name: "vela_dry_run"
         description: "Preview the Kubernetes resources that would be created by an application spec"
