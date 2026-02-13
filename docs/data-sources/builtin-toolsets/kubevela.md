@@ -36,17 +36,6 @@ vela version
     holmes ask "What is the status of my KubeVela applications?"
     ```
 
-=== "Robusta Helm Chart"
-
-    ```yaml
-    holmes:
-        toolsets:
-            kubevela/core:
-                enabled: true
-    ```
-
-    --8<-- "snippets/helm_upgrade_command.md"
-
 ## Common Use Cases
 
 ```bash
