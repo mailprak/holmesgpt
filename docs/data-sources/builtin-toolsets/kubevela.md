@@ -22,6 +22,7 @@ vela version
 
     Add the following to **~/.holmes/config.yaml**:
 
+    <!-- markdownlint-disable-next-line MD046 -->
     ```yaml
     toolsets:
         kubevela/core:
