@@ -1,6 +1,6 @@
 # KubeVela
 
-By enabling this toolset, HolmesGPT will be able to diagnose KubeVela applications, inspect components, check workflow execution, and analyze deployment issues using the Open Application Model (OAM).
+This toolset provides access to KubeVela CLI commands for managing and troubleshooting applications built on the Open Application Model (OAM).
 
 ## Prerequisites
 
